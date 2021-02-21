@@ -1,10 +1,25 @@
 import {React} from 'react' ;
 
-function Message( {content} ) {
+function Message( {content, sender} ) {
+
+    let classOfMsg = "banner";
+    if ( content.sendersName!==false ){
+        if (content.sendersName===sender ) {
+            classOfMsg = "sent";
+        } else {
+            classOfMsg = "received";
+        }
+    }
 
     return(
-        <p>{content}</p>
+        <div className={classOfMsg} >
+            {/* HERE */}
+        </div>
     )
+
+    // sent,
+    // received,
+    // banner
 
 }
 
