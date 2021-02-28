@@ -27,7 +27,8 @@ function App() {
       let idx = message.indexOf(":");
       let senderValue = false;
       if ( idx!=-1 ) {
-        senderValue = message.substring(0,idx);
+        senderValue = message.substring(1,idx);
+        message = message.substring(idx+2);
       }
 
       messagesArr.push({ timestamp: arr[i-1][0], 
@@ -56,21 +57,22 @@ function App() {
 
   return (
     <div>
-      <Navbar className="Navbar"/>
+      {/* <Navbar className="Navbar"/>
       <h1>Hello All!</h1>
-      <h3>Learing React!!</h3>
-      <input content={"Sender's Name"} onChange={ (e) => { setSender(e.target.value); console.log(sender) } } /> 
+      <h3>Learing React!!</h3> */}
       <input type={"file"} id={"fileName"} content={"Choose Backup File"} onChange={(e) => showFile(e)} />
+      <input content={"Sender's Name"} onChange={ (e) => { setSender(e.target.value); console.log(sender) } } /> 
+      <div className="chatRoom" >
       {
         content.map( (message) => {
-          {/* console.log(message); */}
+          console.log(message);
           return(
             <Message content={message} sender={sender} />
           )
         } )
 
       }
-      {/* {content} */}
+      </div>
     </div> 
   );
 }
