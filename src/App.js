@@ -1,8 +1,7 @@
-import logo from './logo.svg';
 import {React, useState} from 'react' ;
 import './styles/App.css';
-import Navbar from './Navbar';
-import Message from './Message';
+
+import ChatRoom from './ChatRoom.js' ;
 
 function App() {
 
@@ -26,7 +25,7 @@ function App() {
       let message = text.substring(arr[i-1][2],arr[i][1]);
       let idx = message.indexOf(":");
       let senderValue = false;
-      if ( idx!=-1 ) {
+      if ( idx!==-1 ) {
         senderValue = message.substring(1,idx);
         message = message.substring(idx+2);
       }
@@ -57,22 +56,14 @@ function App() {
 
   return (
     <div>
-      {/* <Navbar className="Navbar"/>
-      <h1>Hello All!</h1>
-      <h3>Learing React!!</h3> */}
-      <input type={"file"} id={"fileName"} content={"Choose Backup File"} onChange={(e) => showFile(e)} />
-      <input content={"Sender's Name"} onChange={ (e) => { setSender(e.target.value); console.log(sender) } } /> 
-      <div className="chatRoom" >
-      {
-        content.map( (message) => {
-          console.log(message);
-          return(
-            <Message content={message} sender={sender} />
-          )
-        } )
+      
+      <h1>Whatsapp Backup Parser</h1>
 
-      }
-      </div>
+      <input type={"file"} id={"fileName"} placeholder={"Choose Backup File"} onChange={(e) => showFile(e)} />
+      <input placeholder={"Sender's Name"} onChange={ (e) => { setSender(e.target.value); console.log(sender) } } /> 
+      
+      <ChatRoom content={content} sender={sender} />
+
     </div> 
   );
 }

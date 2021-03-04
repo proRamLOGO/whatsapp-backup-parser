@@ -36,6 +36,7 @@ div {
     width: fit-content;
     background-color: skyblue;
     color: #2f2f2f;
+    margin-top: 0px;
 }
 
 .time {
