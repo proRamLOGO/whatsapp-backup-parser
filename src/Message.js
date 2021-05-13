@@ -37,8 +37,8 @@ function Message( {content, sender} ) {
                 </div>
                 
                 {  
-                (classOfMsg!="banner")?
-                <p className={"time"} > {content.timestamp.substring(11,21 + (content.timestamp[12]!=':') )} </p>:
+                (classOfMsg!=="banner")?
+                <p className={"time"} > {content.timestamp.substring(11,21 + (content.timestamp[12]!==':') )} </p>:
                 <></>
                 }
             </div>
