@@ -1,5 +1,5 @@
 div {
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .sent {
@@ -32,7 +32,7 @@ div {
 
 .banner__content {
     padding: 5px 10px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     width: fit-content;
     background-color: skyblue;
     color: #2f2f2f;

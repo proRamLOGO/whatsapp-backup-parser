@@ -43,6 +43,7 @@ const styles = {
     'headerText' : {
         fontFamily: "'Poppins', 'sans-serif'",
         fontSize: 48,
+        textAlign: 'center',
     },
     'fileUploadSection' : {
         top: 0, 
@@ -76,6 +77,7 @@ const styles = {
     'uploadHelpText' : {
         fontSize: 20,
         fontFamily: "'Roboto', 'sans-serif'",
+        textAlign: 'center',
     },
 
     'appView' : { 

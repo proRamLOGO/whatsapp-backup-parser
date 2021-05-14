@@ -14,7 +14,6 @@ function Banner( {content} ) {
 function Message( {content, sender} ) {
 
     let classOfMsg = "banner";
-    console.log(content);
     if ( content.sendersName!==false ){
         if (content.sendersName===sender ) {
             classOfMsg = "sent";
