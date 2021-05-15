@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Message from '../../components/chatroom/Message';
 
 import chatBackgroundImage from '../../../assets/bgimage.jpeg'
@@ -7,6 +7,8 @@ import unknownGroupIcon from '../../../assets/unknownGroup.svg'
 import dayModeIcon from '../../../assets/dayModeIcon.png'
 import nightModeIcon from '../../../assets/nightModeIcon.png'
 import infoIcon from '../../../assets/infoIcon.png'
+// import screenShotIcon from '../../../assets/screenShotIcon.png'
+import printerIcon from '../../../assets/printerIcon.svg'
 
 const styles = {
     'chatRoom': {
@@ -17,6 +19,7 @@ const styles = {
         maxWidth: '90vw',
         overflow: 'scroll',
         fontFamily: '-apple-system, BlinkMacSystemFont',
+        paddingTop: 10,
     },
     'chatBar' : {
         // height: '7vh',
@@ -27,7 +30,7 @@ const styles = {
         backgroundColor: '#EDEDED',
         justifyContent: 'space-between',
         color: '#000',
-        borderBottom: '1px solid rgba(0,0,0,0.1)'
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
     },
     'chatIcon' : {
         height: 40,
@@ -65,6 +68,17 @@ const styles = {
 }
 
 function ChatRoom( {content, sender} ) {
+
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+  
+    useEffect(() => {
+      scrollToBottom()
+    }, []);
+  
     return ( 
     
         <div style={{
@@ -78,6 +92,8 @@ function ChatRoom( {content, sender} ) {
                     <h4 style={styles.h4} >Whatsapp Group / Personal Chat</h4>
                 </div>
                 <div style={styles.utilityButtons} >
+                    {/* <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={"https://img.icons8.com/fluent-systems-filled/48/000000/take-screenshot.png"} /></button>
+                    <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={printerIcon} /></button> */}
                     <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={dayModeIcon} /></button>
                     <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={infoIcon} /></button>
                 </div>
@@ -93,10 +109,11 @@ function ChatRoom( {content, sender} ) {
             }
             </div>
 
-            <div style={styles.searchBar} >
+            {/* Search in Chatroom */}
+            {/* <div style={styles.searchBar} >
                 <input type={"text"} style={styles.serachBarTecHolder} ></input>
-            </div>
-
+            </div> */}
+            <div ref={messagesEndRef}></div>
         </div>
     )
 }

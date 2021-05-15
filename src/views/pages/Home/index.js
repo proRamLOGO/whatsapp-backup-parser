@@ -4,24 +4,6 @@ import {makeMessages} from '../../../utils/makeMessages';
 import ChatRoom from '../../components/chatroom/' ;
 import appIcon from '../../../assets/icon.png';
 
-
-function App() {
-
-//   return (
-//     <>
-      
-//       <h1>Whatsapp Backup Parser</h1>
-
-//       <input type={"file"} id={"fileName"} placeholder={"Choose Backup File"} onChange={handleFileInput} />
-      
-//       <input placeholder={"Sender's Name"} onChange={ (e) => setSenderName(e.target.value) } /> 
-      
-//       <ChatRoom content={messagesCollection} sender={senderName} />
-
-//     </> 
-//   );
-}
-
 const styles = {
     'header' : { 
         minHeight: '70vh', 
@@ -102,6 +84,7 @@ function Home() {
             setMessagesCollection(messages)};
         try {
             reader.readAsText(e.target.files[0]);
+            window.scrollTo(0,document.body.scrollHeight);
         } catch (err) {
             let a = 1;
         }
@@ -130,7 +113,7 @@ function Home() {
                 
                 <p style={styles.uploadHelpText} >
                     Upload a valid Whatsapp Chat Backup txt file or try ulpoading&nbsp;
-                    <a href={'https://fb.com/'} >
+                    <a href={'../../../utils/sampleChat.txt'} >
                         this file.
                     </a>
                 </p>

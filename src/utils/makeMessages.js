@@ -29,7 +29,7 @@ export function makeMessages( text ) {
     });
   }
 
-  console.log(messagesArr);
+  // console.log(messagesArr);
   return messagesArr;
 
 }
