@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/whatsapp-backup-parser/static/css/main.bdd6b67a.chunk.css",
-    "main.js": "/whatsapp-backup-parser/static/js/main.ecb6de66.chunk.js",
-    "main.js.map": "/whatsapp-backup-parser/static/js/main.ecb6de66.chunk.js.map",
-    "runtime-main.js": "/whatsapp-backup-parser/static/js/runtime-main.3c0984ec.js",
-    "runtime-main.js.map": "/whatsapp-backup-parser/static/js/runtime-main.3c0984ec.js.map",
-    "static/js/2.4625e204.chunk.js": "/whatsapp-backup-parser/static/js/2.4625e204.chunk.js",
-    "static/js/2.4625e204.chunk.js.map": "/whatsapp-backup-parser/static/js/2.4625e204.chunk.js.map",
-    "static/js/3.22c13aa3.chunk.js": "/whatsapp-backup-parser/static/js/3.22c13aa3.chunk.js",
-    "static/js/3.22c13aa3.chunk.js.map": "/whatsapp-backup-parser/static/js/3.22c13aa3.chunk.js.map",
+    "main.js": "/whatsapp-backup-parser/static/js/main.b1c5e828.chunk.js",
+    "main.js.map": "/whatsapp-backup-parser/static/js/main.b1c5e828.chunk.js.map",
+    "runtime-main.js": "/whatsapp-backup-parser/static/js/runtime-main.122f400d.js",
+    "runtime-main.js.map": "/whatsapp-backup-parser/static/js/runtime-main.122f400d.js.map",
+    "static/js/2.2cce064a.chunk.js": "/whatsapp-backup-parser/static/js/2.2cce064a.chunk.js",
+    "static/js/2.2cce064a.chunk.js.map": "/whatsapp-backup-parser/static/js/2.2cce064a.chunk.js.map",
+    "static/js/3.8121f3ec.chunk.js": "/whatsapp-backup-parser/static/js/3.8121f3ec.chunk.js",
+    "static/js/3.8121f3ec.chunk.js.map": "/whatsapp-backup-parser/static/js/3.8121f3ec.chunk.js.map",
     "index.html": "/whatsapp-backup-parser/index.html",
     "static/css/main.bdd6b67a.chunk.css.map": "/whatsapp-backup-parser/static/css/main.bdd6b67a.chunk.css.map",
-    "static/js/2.4625e204.chunk.js.LICENSE.txt": "/whatsapp-backup-parser/static/js/2.4625e204.chunk.js.LICENSE.txt",
+    "static/js/2.2cce064a.chunk.js.LICENSE.txt": "/whatsapp-backup-parser/static/js/2.2cce064a.chunk.js.LICENSE.txt",
     "static/media/background.21544187.png": "/whatsapp-backup-parser/static/media/background.21544187.png",
     "static/media/App.css": "/whatsapp-backup-parser/static/media/bgimage.ed673d52.jpeg",
     "static/media/dayModeIcon.5d46322c.png": "/whatsapp-backup-parser/static/media/dayModeIcon.5d46322c.png",
@@ -24,9 +24,9 @@
     "static/media/unknownPerson.d3441b18.svg": "/whatsapp-backup-parser/static/media/unknownPerson.d3441b18.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.3c0984ec.js",
-    "static/js/2.4625e204.chunk.js",
+    "static/js/runtime-main.122f400d.js",
+    "static/js/2.2cce064a.chunk.js",
     "static/css/main.bdd6b67a.chunk.css",
-    "static/js/main.ecb6de66.chunk.js"
+    "static/js/main.b1c5e828.chunk.js"
   ]
 }
