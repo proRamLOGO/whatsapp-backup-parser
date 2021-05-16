@@ -2,6 +2,7 @@ import {React} from 'react' ;
 // import '../../../styles/Message.css';
 import sentPin from '../../../assets/sentPin.svg';
 import receivedPin from '../../../assets/receivedPin.svg';
+import parse from 'html-react-parser';
 
 const styles = {
 
@@ -12,6 +13,7 @@ const styles = {
 
     'banner' : {
         padding: '5px 12px 6px',
+        margin: '6px',
         textAlign: 'center',
         backgroundColor: '#E1F3FB',
         borderRadius: 7.5,
@@ -49,7 +51,6 @@ const styles = {
     'received' : {
         padding: '6px 7px 0px 9px',
         marginBottom: 5,
-        width: 'auto',
         maxWidth: '60%',
         backgroundColor: '#FFF',
         borderRadius: '0px 7.5px 7.5px 7.5px',
@@ -70,9 +71,75 @@ const styles = {
         fontWeight: 'bold',
         margin: '0px 0px 5px -2px',
         padding: '0px 0px 5px 2px',
+    }, 
+
+    'a' : {
+        textDecoration: 'none',
+        color: '#039BE5',
     },
 
 };
+
+function processMessage(message) {
+
+    // console.log(message.split('\n'));
+    // return message;
+    // The function will 
+    // 1. Split message acc to line breaks
+    // 2. Detect for links
+    // 3. Add bold(<b></b>), italic(<i></i>) and strikethrough(<s></s>) tags in between the message at respective places. By watching '*'s, '_'s and '~' respectively.
+
+    // URLs PROCESSED
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    message = message.replace(urlRegex, url => '<a style="text-decoration: none; color: #039BE5;" href="' + url + '">' + url + '</a>') ;
+
+    // MESSAGE SPLITTED ON BASIS OF NEW LINES/LINE BREAKS
+    const partsOfMessage = message.split(/\r\n|\n|\r/);
+    
+    // PROCESSING BOLD, ITALIC AND STRIKETHROUGH
+    let processedMessage = '';
+    for ( var i = 0 ; i < partsOfMessage.length ; ++i ) { 
+        
+        let processedMessagePart = '';
+        let totalBolds=0, totalItalics=0, totalStrikes=0;
+        for ( const ch of partsOfMessage[i] ) {
+            if ( ch==='*')
+                ++totalBolds;
+            else if ( ch==='_')
+                ++totalItalics;
+            else if ( ch==='~')
+                ++totalStrikes;
+        }
+
+        let boldCount=0, italicCount=0, strikeCount=0;
+        for ( const ch of partsOfMessage[i] ) {
+            
+            if ( ch==='*') {
+                if ( (totalBolds&1)===1 && boldCount===totalBolds )
+                    continue;
+                processedMessagePart += ( (boldCount&1)===0 ) ? '<b>' : '</b>';
+                ++boldCount;
+            }
+            else if ( ch==='_') {
+                if ( (totalItalics&1)===1 && italicCount===totalItalics )
+                    continue;
+                processedMessagePart += ( (italicCount&1)===0 ) ? '<i>' : '</i>';
+                ++italicCount;
+            }
+            else if ( ch==='*') {
+                if ( (totalStrikes&1)===1 && strikeCount===totalStrikes )
+                    continue;
+                processedMessagePart += ( (strikeCount&1)===0 ) ? '<s>' : '</s>';
+                ++strikeCount;
+            } else {
+                processedMessagePart += ch;
+            }
+        }
+        processedMessage += processedMessagePart + ((i<=(partsOfMessage.length-2))?'<br/>':'');
+    }
+    console.log(processedMessage);
+    return processedMessage;
+}
 
 function Banner( {content} ) {
 
@@ -102,13 +169,13 @@ function Message( {content, sender} ) {
     } else {
         return (<>
             
-            <div style={styles.['messageBody'+classOfMsg]} >
-                <img src={ (classOfMsg==="sent") ? sentPin : receivedPin } style={{filter: 'red'}} />
+            <div style={styles['messageBody'+classOfMsg]} >
+                <img src={ (classOfMsg==="sent") ? sentPin : receivedPin } style={{filter: 'red'}} alt={'msgpin'} />
 
                 <div className={classOfMsg} style={styles[classOfMsg]} >
                     <p className={"sender"} style={styles.senderName} >{content.sendersName}</p>
-                    <div className={"contentOfMessage"} style={{width: 'fit-content', wordWrap: 'break-word'}} >
-                        {content.messageBody}
+                    <div className={"contentOfMessage"} style={{width: 'fit-content', wordWrap: 'break-word', lineHeight: '19px'}} >
+                        {parse(processMessage(content.messageBody))}
                     </div>
                     
                     {  
