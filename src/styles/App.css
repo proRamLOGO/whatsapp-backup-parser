@@ -46,7 +46,3 @@ Navbar li {
     transform: rotate(360deg);
   }
 }
-
-ChatRoom {
-  background-image: url("../assets/bgimage.jpeg");
-}

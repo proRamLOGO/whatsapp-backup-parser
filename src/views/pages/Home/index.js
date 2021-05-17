@@ -86,7 +86,7 @@ function Home() {
             reader.readAsText(e.target.files[0]);
             window.scrollTo(0,document.body.scrollHeight);
         } catch (err) {
-            let a = 1;
+            alert("No file selected!");
         }
     }
 
@@ -97,7 +97,7 @@ function Home() {
             </nav>         */}
             <header style={styles.header}> 
                 <div style={styles.headerContent}>
-                    <img id={"icon"} src={appIcon} style={styles.icon} ></img>
+                    <img id={"icon"} src={appIcon} style={styles.icon} alt={'icon'} ></img>
                     <h1 style={styles.headerText} >Whatapp Backup Parser</h1>
                 </div>
             </header>    

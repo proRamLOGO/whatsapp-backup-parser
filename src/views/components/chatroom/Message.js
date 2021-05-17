@@ -4,81 +4,7 @@ import sentPin from '../../../assets/sentPin.svg';
 import receivedPin from '../../../assets/receivedPin.svg';
 import parse from 'html-react-parser';
 
-const styles = {
 
-    'bannerContainer' : {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-
-    'banner' : {
-        padding: '5px 12px 6px',
-        margin: '6px',
-        textAlign: 'center',
-        backgroundColor: '#E1F3FB',
-        borderRadius: 7.5,
-        boxShadow: '0 1px 0.5px rgba(0,0,0,.15)',
-        textColor: '#1D1E1F',
-        fontSize: 12,
-    },
-
-    'messageBodyreceived' : {
-        padding : '0px 52px 0px 52px',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'start',
-    },
-
-    'messageBodysent' : {
-        padding : '0px 52px 0px 52px',
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        alignItems: 'start',
-    },
-
-    'sent' : {
-        padding: '6px 7px 1px 9px',
-        marginBottom: 5,
-        maxWidth: '60%',
-        backgroundColor: '#DCF8C6',
-        borderRadius: '7.5px 0px 7.5px 7.5px',
-        fontSize: 14,
-        boxShadow: '0 1px .5px rgba(0,0,0,.13)',
-        width: 'fit-content',
-        wordWrap: 'break-word',
-    },
-
-    'received' : {
-        padding: '6px 7px 0px 9px',
-        marginBottom: 5,
-        maxWidth: '60%',
-        backgroundColor: '#FFF',
-        borderRadius: '0px 7.5px 7.5px 7.5px',
-        boxShadow: '0 1px .5px rgba(0,0,0,.13)',
-        fontSize: 14,
-        width: 'fit-content',
-        wordWrap: 'break-word',
-    },
-
-    'time' : {
-        textAlign: 'right',
-        fontSize: 11,
-        color: '#8C8C8C',
-    },
-
-    'senderName' : {
-        fontSize: 12.8,
-        fontWeight: 'bold',
-        margin: '0px 0px 5px -2px',
-        padding: '0px 0px 5px 2px',
-    }, 
-
-    'a' : {
-        textDecoration: 'none',
-        color: '#039BE5',
-    },
-
-};
 
 function processMessage(message) {
 
@@ -90,8 +16,8 @@ function processMessage(message) {
     // 3. Add bold(<b></b>), italic(<i></i>) and strikethrough(<s></s>) tags in between the message at respective places. By watching '*'s, '_'s and '~' respectively.
 
     // URLs PROCESSED
-    var urlRegex = /(https?:\/\/[^\s]+)/g;
-    message = message.replace(urlRegex, url => '<a style="text-decoration: none; color: #039BE5;" href="' + url + '">' + url + '</a>') ;
+    var urlRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
+    message = message.replace(urlRegex, url => '<a style="text-decoration: none; color: #039BE5;" href="' + url + '" target="_blank" rel="noopener noreferrer" >' + url + '</a>') ;
 
     // MESSAGE SPLITTED ON BASIS OF NEW LINES/LINE BREAKS
     const partsOfMessage = message.split(/\r\n|\n|\r/);
@@ -137,23 +63,104 @@ function processMessage(message) {
         }
         processedMessage += processedMessagePart + ((i<=(partsOfMessage.length-2))?'<br/>':'');
     }
-    console.log(processedMessage);
+    
     return processedMessage;
 }
 
-function Banner( {content} ) {
+function Message( {content, sender, theme} ) {
 
-    return (
-        <div className={"banner"} style={styles.bannerContainer} >
-            <p className={"banner__content"} style={styles.banner} >{content}</p>
-        </div>
-    );
+    const styles = {
 
-}
+        'bannerContainer' : {
+            display: 'flex',
+            justifyContent: 'center',
+        },
+    
+        'banner' : {
+            padding: '5px 12px 6px',
+            margin: '6px',
+            textAlign: 'center',
+            backgroundColor: (theme==='light')?'#E1F3FB':'#1E2A30',
+            borderRadius: 7.5,
+            boxShadow: '0 1px 0.5px rgba(0,0,0,.15)',
+            color: (theme==='light')?'#1D1E1F':'#FFF',
+            fontSize: 12,
+        },
+        
+        'messageBodyreceived' : {
+            padding : '0px 52px 0px 52px',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'start',
+            color: (theme==='light')?'#000':'#FFF',
+        },
+    
+        'messageBodysent' : {
+            padding : '0px 52px 0px 52px',
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            alignItems: 'start',
+            color: (theme==='light')?'#000':'#FFF',
+        },
+    
+        'sent' : {
+            padding: '6px 7px 1px 9px',
+            marginBottom: 5,
+            maxWidth: '60%',
+            backgroundColor: (theme==='light')?'#DCF8C6':'#056162',
+            borderRadius: '7.5px 0px 7.5px 7.5px',
+            fontSize: 14,
+            boxShadow: '0 1px .5px rgba(0,0,0,.13)',
+            width: 'fit-content',
+            wordWrap: 'break-word',
+        },
+    
+        'received' : {
+            padding: '6px 7px 0px 9px',
+            marginBottom: 5,
+            maxWidth: '60%',
+            backgroundColor: (theme==='light')?'#FFF':'#262D31',
+            borderRadius: '0px 7.5px 7.5px 7.5px',
+            boxShadow: '0 1px .5px rgba(0,0,0,.13)',
+            fontSize: 14,
+            width: 'fit-content',
+            wordWrap: 'break-word',
+        },
+    
+        'time' : {
+            textAlign: 'right',
+            fontSize: 11,
+            fontWeight: '500',
+            color: '#8C8C8C',
+            color: (theme==='light')?'#8C8C8C':'#9CBCBD',
+        },
+    
+        'senderName' : {
+            fontSize: 12.8,
+            fontWeight: 'bold',
+            margin: '0px 0px 5px -2px',
+            padding: '0px 0px 5px 2px',
+        }, 
+    
+        'a' : {
+            textDecoration: 'none',
+            color: '#039BE5',
+        },
+    
+    };
 
-function Message( {content, sender} ) {
+
+    function Banner( {content} ) {
+        return (
+            <div className={"banner"} style={styles.bannerContainer} >
+                <p className={"banner__content"} style={styles.banner} >{content}</p>
+            </div>
+        );
+    }
+
 
     let classOfMsg = "banner";
+    
     if ( content.sendersName!==false ){
         if (content.sendersName===sender ) {
             classOfMsg = "sent";
@@ -170,7 +177,7 @@ function Message( {content, sender} ) {
         return (<>
             
             <div style={styles['messageBody'+classOfMsg]} >
-                <img src={ (classOfMsg==="sent") ? sentPin : receivedPin } style={{filter: 'red'}} alt={'msgpin'} />
+                <img src={ (classOfMsg==="sent") ? sentPin : receivedPin } style={{filter: 'invert(0.6)'}} alt={'msgpin'} />
 
                 <div className={classOfMsg} style={styles[classOfMsg]} >
                     <p className={"sender"} style={styles.senderName} >{content.sendersName}</p>
