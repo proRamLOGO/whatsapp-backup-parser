@@ -1,48 +1,65 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Message from '../../components/chatroom/Message';
+import html2canvas from 'html2canvas';
 
-import chatBackgroundImageLightTheme from '../../../assets/bgimagelight.jpeg'
-import chatBackgroundImageDarkTheme from '../../../assets/bgimagedark.jpeg'
-import unknownPersonIcon from '../../../assets/unknownPerson.svg'
-import unknownGroupIcon from '../../../assets/unknownGroup.svg'
-import lightModeIcon from '../../../assets/lightModeIcon.png'
-import nightModeIcon from '../../../assets/nightModeIcon.png'
-import infoIcon from '../../../assets/infoIcon.png'
-// import screenShotIcon from '../../../assets/screenShotIcon.png'
-import printerIcon from '../../../assets/printerIcon.svg'
+import Message from '../../components/chatroom/Message';
+import '../../../styles/App.css';
+import {requestFullScreen} from '../../../utils/requestFullScreen.js';
+import {saveAs} from '../../../utils/saveAs';
+
+import chatBackgroundImageLightTheme from '../../../assets/bgimagelight.jpeg';
+import chatBackgroundImageDarkTheme from '../../../assets/bgimagedark.jpeg';
+import unknownPersonIcon from '../../../assets/unknownPerson.svg';
+import unknownGroupIcon from '../../../assets/unknownGroup.svg';
+import lightModeIcon from '../../../assets/lightModeIcon.svg';
+import darkModeIcon from '../../../assets/darkModeIcon.svg';
+import infoIcon from '../../../assets/infoIcon.svg';
+import screenShotIcon from '../../../assets/screenShotIcon.svg'
+import enableFullScreenIcon from '../../../assets/enableFullScreenIcon.svg';
+import disableFullScreenIcon from '../../../assets/disableFullScreenIcon.svg';
 
 function ChatRoom( {content, sender} ) {
 
     const messagesEndRef = useRef(null);
     const [theme, setTheme] = useState('light');
+    const [fullScreen, setFullScreen] = useState('disabled');
 
-    const scrollToBottom = () => {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    }
+    const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   
     const toggleTheme = () => setTheme((theme==='dark')?'light':'dark');
+    const toggleFullScreen = () => {
+        setFullScreen((fullScreen==='disabled')?'enabled':'disabled');
+        requestFullScreen(fullScreen);
+    };
+
+    const takeScreenShot = () => {
+        var data = document.getElementById('chatRoom')
+        html2canvas(data, {scrollY: -(-50+document.getElementById('chatHeader').offsetTop) }).then((canvas)=>{
+          var image = canvas.toDataURL('image/png', 1.0);
+          saveAs(image, "ss")
+        })
+    }
 
     useEffect(() => {
       scrollToBottom()
-    }, []);
+    }, [fullScreen]);
   
     const styles = {
         'chatRoom': {
             backgroundImage: `url(${(theme==='light')?chatBackgroundImageLightTheme:chatBackgroundImageDarkTheme})`,
             backgroundRepeat: 'repeat',
             backgroundSize: '200px 400px',
-            maxHeight: '80vh',
-            maxWidth: '90vw',
+            height: (fullScreen==='enabled')?'92vh':'80vh',
+            width: (fullScreen==='enabled')?'100vw':'90vw',
+            // maxWidth: '90vw',
             overflow: 'scroll',
             fontFamily: '-apple-system, BlinkMacSystemFont',
             paddingTop: 10,
+            display: 'block',
         },
         'chatBar' : {
-            // height: '7vh',
-            height: '59px',
+            height: '7vh',
             display: 'flex',
             flexDirection: 'row',
-            width: '100%',
             backgroundColor: (theme==='light')?'#EDEDED':'#2A2F32',
             justifyContent: 'space-between',
             color: (theme==='light')?'#000':'#FFF',
@@ -72,12 +89,15 @@ function ChatRoom( {content, sender} ) {
             alignItems: 'center',
             justifyContent: 'flex-end',
             width: '20%',
-            paddingRight: 20,
+            paddingRight: 10,
         },
         'utilityButton' : {
             backgroundColor: 'transparent',
             border: 'none',
-            paddingRight: 20,
+            marginRight: 10,
+            height: 50,
+            width: 50,
+            borderRadius: 50,
         },
         'utilityButtonIcon' : {
             cursor: 'pointer',
@@ -87,21 +107,23 @@ function ChatRoom( {content, sender} ) {
 
     return ( 
     
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            }}>
+        <div id={'chatRoom'} className={(fullScreen==='enabled')?'fullscreen':''}
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+            >
             
-            <div style={styles.chatBar} >
+            <div style={styles.chatBar} id={'chatHeader'} >
                 <div style={styles.profileGroup}>
-                    <img style={styles.chatIcon} src={unknownPersonIcon} ></img>
+                    <img style={styles.chatIcon} src={unknownPersonIcon} alt={'Chat Icon'} ></img>
                     <h4 style={styles.h4} >Whatsapp Group / Personal Chat</h4>
                 </div>
                 <div style={styles.utilityButtons} >
-                    {/* <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={"https://img.icons8.com/fluent-systems-filled/48/000000/take-screenshot.png"} /></button>
-                    <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={printerIcon} /></button> */}
-                    <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={(theme==='light')?lightModeIcon:nightModeIcon} onClick={toggleTheme}/></button>
-                    <button style={styles.utilityButton}><img style={styles.utilityButtonIcon} src={infoIcon} /></button>
+                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={screenShotIcon} onClick={takeScreenShot}  alt={'ScreenShot Button'}/></button>
+                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={(fullScreen==='disabled')?enableFullScreenIcon:disableFullScreenIcon} onClick={toggleFullScreen}  alt={'FullScreen Button'}/></button>
+                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={(theme==='light')?lightModeIcon:darkModeIcon} onClick={toggleTheme}  alt={'Toggle Theme Button'}/></button>
+                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={infoIcon}  alt={'Info Button'}/></button>
                 </div>
             </div>
 
@@ -114,13 +136,14 @@ function ChatRoom( {content, sender} ) {
                 } )
             }
             </div>
-
+            
             {/* Search in Chatroom */}
             {/* <div style={styles.searchBar} >
                 <input type={"text"} style={styles.serachBarTecHolder} ></input>
             </div> */}
             <div ref={messagesEndRef}></div>
         </div>
+
     )
 }
 
