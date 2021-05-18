@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
+
 import html2canvas from 'html2canvas';
+import ReactTooltip from 'react-tooltip';
 
 import Message from '../../components/chatroom/Message';
 import '../../../styles/App.css';
@@ -17,7 +19,7 @@ import screenShotIcon from '../../../assets/screenShotIcon.svg'
 import enableFullScreenIcon from '../../../assets/enableFullScreenIcon.svg';
 import disableFullScreenIcon from '../../../assets/disableFullScreenIcon.svg';
 
-function ChatRoom( {content, sender} ) {
+function ChatRoom( {content, sender, setModalState} ) {
 
     const messagesEndRef = useRef(null);
     const [theme, setTheme] = useState('light');
@@ -35,7 +37,7 @@ function ChatRoom( {content, sender} ) {
         var data = document.getElementById('chatRoom')
         html2canvas(data, {scrollY: -(-50+document.getElementById('chatHeader').offsetTop) }).then((canvas)=>{
           var image = canvas.toDataURL('image/png', 1.0);
-          saveAs(image, "ss")
+          saveAs(image, "Whatsapp Chat Screenshot")
         })
     }
 
@@ -69,8 +71,6 @@ function ChatRoom( {content, sender} ) {
         },
         'chatIcon' : {
             height: 40,
-            paddingLeft: 20,
-            paddingRight: 10,
         },
         'profileGroup' : {
             // backgroundColor: 'yellow',
@@ -103,6 +103,14 @@ function ChatRoom( {content, sender} ) {
             cursor: 'pointer',
             height: 24,
         },
+        'profileButton' : {
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+            borderRadius: 30,
+            marginLeft: '20px',
+            width: 60,
+            cursor: 'pointer',
+        }
     }
 
     return ( 
@@ -116,32 +124,53 @@ function ChatRoom( {content, sender} ) {
             
             <div style={styles.chatBar} id={'chatHeader'} >
                 <div style={styles.profileGroup}>
-                    <img style={styles.chatIcon} src={unknownPersonIcon} alt={'Chat Icon'} ></img>
-                    <h4 style={styles.h4} >Whatsapp Group / Personal Chat</h4>
+                    
+                    <button style={styles.profileButton} onClick={() => setModalState(true)} >
+                        <img data-tip data-for={"profileButtonToolTip"} style={styles.chatIcon} src={unknownPersonIcon} alt={'Chat Icon'} />
+                        <ReactTooltip id={'profileButtonToolTip'} place={'bottom'} effect={'solid'} type={(theme==='light')?'dark':'light'}>Set Sender</ReactTooltip>
+                    </button>
+                    
+                    <h4 style={styles.h4} >Whatsapp Chat</h4>
                 </div>
                 <div style={styles.utilityButtons} >
-                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={screenShotIcon} onClick={takeScreenShot}  alt={'ScreenShot Button'}/></button>
-                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={(fullScreen==='disabled')?enableFullScreenIcon:disableFullScreenIcon} onClick={toggleFullScreen}  alt={'FullScreen Button'}/></button>
-                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={(theme==='light')?lightModeIcon:darkModeIcon} onClick={toggleTheme}  alt={'Toggle Theme Button'}/></button>
-                    <button style={styles.utilityButton} className={"ripple"} ><img style={styles.utilityButtonIcon} src={infoIcon}  alt={'Info Button'}/></button>
+                    <button style={styles.utilityButton} className={"ripple"} >
+                        <img data-tip data-for={"screenshotButtonToolTip"} style={styles.utilityButtonIcon} src={screenShotIcon} onClick={takeScreenShot}  alt={'ScreenShot Button'}/>
+                        <ReactTooltip id={'screenshotButtonToolTip'} place={'bottom'} effect={'solid'} type={(theme==='light')?'dark':'light'}>Take ScreenShot</ReactTooltip>
+                    </button>
+
+                    <button style={styles.utilityButton} className={"ripple"} >
+                        <img data-tip data-for={"screenSizeButtonToolTip"} style={styles.utilityButtonIcon} src={(fullScreen==='disabled')?enableFullScreenIcon:disableFullScreenIcon} onClick={toggleFullScreen}  alt={'FullScreen Button'}/>
+                        <ReactTooltip id={'screenSizeButtonToolTip'} place={'bottom'} effect={'solid'} type={(theme==='light')?'dark':'light'}>{(fullScreen==='disabled')?'Enter FullScreen':'Exit Fullscreen'}</ReactTooltip>
+                    </button>
+                
+                    <button style={styles.utilityButton} className={"ripple"} >
+                        <img data-tip data-for={"themeButtonToolTip"} style={styles.utilityButtonIcon} src={(theme==='light')?lightModeIcon:darkModeIcon} onClick={toggleTheme}  alt={'Toggle Theme Button'}/>
+                        <ReactTooltip id={'themeButtonToolTip'} place={'bottom'} effect={'solid'} type={(theme==='light')?'dark':'light'}>{(theme==='light')?'Dark Mode':'Light Mode'}</ReactTooltip>
+                    </button>
+                
+                    <button style={styles.utilityButton} className={"ripple"} >
+                        <img data-tip data-for={"infoButtonToolTip"} style={styles.utilityButtonIcon} src={infoIcon}  alt={'Info Button'}/>
+                        <ReactTooltip id={'infoButtonToolTip'} place={'bottom'} effect={'solid'} type={(theme==='light')?'dark':'light'}>Chat Info</ReactTooltip>
+                    </button>
+                
                 </div>
             </div>
 
             <div className="chatRoom" style={styles.chatRoom} >
             {
-                content.map( (message) => {
+                content.map( (message, messageNo) => {
                 return(
-                    <Message content={message} sender={'Shubh Bansal'} theme={theme}/>
+                    <Message content={message} sender={sender} theme={theme} key={'Message' + messageNo}/>
                 )
                 } )
             }
+            <div ref={messagesEndRef}></div>
             </div>
             
             {/* Search in Chatroom */}
             {/* <div style={styles.searchBar} >
                 <input type={"text"} style={styles.serachBarTecHolder} ></input>
             </div> */}
-            <div ref={messagesEndRef}></div>
         </div>
 
     )

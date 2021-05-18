@@ -18,3 +18,18 @@
   bottom: 0;
   right: 0;
 }
+
+select:focus {
+  outline: none
+}
+
+.footerLink {
+  text-decoration: none;
+  color: #4DAF00;
+  transition: color 0.1s linear ;
+}
+
+.footerLink:hover {
+  color: #aaff68;
+
+}

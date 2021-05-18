@@ -1,14 +1,11 @@
 import {React} from 'react' ;
-// import '../../../styles/Message.css';
-import sentPin from '../../../assets/sentPin.svg';
-import receivedPin from '../../../assets/receivedPin.svg';
+import darkSentPin from '../../../assets/darkSentPin.svg';
+import darkReceivedPin from '../../../assets/darkReceivedPin.svg';
+import lightSentPin from '../../../assets/lightSentPin.svg';
+import lightReceivedPin from '../../../assets/lightReceivedPin.svg';
 import parse from 'html-react-parser';
 
-
-
 function processMessage(message) {
-
-    // console.log(message.split('\n'));
     // return message;
     // The function will 
     // 1. Split message acc to line breaks
@@ -41,19 +38,19 @@ function processMessage(message) {
         for ( const ch of partsOfMessage[i] ) {
             
             if ( ch==='*') {
-                if ( (totalBolds&1)===1 && boldCount===totalBolds )
+                if ( (totalBolds&1)===1 && boldCount===totalBolds-1 )
                     continue;
                 processedMessagePart += ( (boldCount&1)===0 ) ? '<b>' : '</b>';
                 ++boldCount;
             }
             else if ( ch==='_') {
-                if ( (totalItalics&1)===1 && italicCount===totalItalics )
+                if ( (totalItalics&1)===1 && italicCount===totalItalics-1 )
                     continue;
                 processedMessagePart += ( (italicCount&1)===0 ) ? '<i>' : '</i>';
                 ++italicCount;
             }
-            else if ( ch==='*') {
-                if ( (totalStrikes&1)===1 && strikeCount===totalStrikes )
+            else if ( ch==='~') {
+                if ( (totalStrikes&1)===1 && strikeCount===totalStrikes-1 )
                     continue;
                 processedMessagePart += ( (strikeCount&1)===0 ) ? '<s>' : '</s>';
                 ++strikeCount;
@@ -131,7 +128,6 @@ function Message( {content, sender, theme} ) {
             textAlign: 'right',
             fontSize: 11,
             fontWeight: '500',
-            color: '#8C8C8C',
             color: (theme==='light')?'#8C8C8C':'#9CBCBD',
         },
     
@@ -177,7 +173,9 @@ function Message( {content, sender, theme} ) {
         return (<>
             
             <div style={styles['messageBody'+classOfMsg]} >
-                <img src={ (classOfMsg==="sent") ? sentPin : receivedPin } style={{filter: 'invert(0.6)'}} alt={'msgpin'} />
+                
+                <img src={(theme==='light')? ((classOfMsg==='sent')?lightSentPin:lightReceivedPin) : ((classOfMsg==='sent')?darkSentPin:darkReceivedPin)} 
+                alt={'msgpin'} />
 
                 <div className={classOfMsg} style={styles[classOfMsg]} >
                     <p className={"sender"} style={styles.senderName} >{content.sendersName}</p>
@@ -187,11 +185,12 @@ function Message( {content, sender, theme} ) {
                     
                     {  
                     (classOfMsg!=="banner")?
-                    <p style={styles.time} > {content.timestamp.substring(11,21 + (content.timestamp[12]!==':') )} </p>:
-                    <></>
+                    <p style={styles.time} >{content.timestamp.substring(11,15 + (content.timestamp[12]!==':') ) + ' ' + content.timestamp.substring(content.timestamp.length-3,content.timestamp.length-1)} </p>
+                    :<></>
                     }
 
                 </div>
+                
             </div>
         </>)
     }

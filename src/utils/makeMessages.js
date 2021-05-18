@@ -2,8 +2,9 @@ export function makeMessages( text ) {
 
   const regex = /\[(\d+\/\d+\/\d+)(,)(\s)(\d+:\d+:\d+)(\s)(\w+)\]/g ;
   let arr = []
+  let authors = new Set(['Select a Sender']);
   const messages = text.matchAll(regex);
-  console.log(text[66], text[87]);
+  
   for ( const message of messages ) {
     arr.push(
       [ message[0], message.index, message.index+message[0].length ]
@@ -18,6 +19,7 @@ export function makeMessages( text ) {
     let senderValue = false;
     if ( idx!==-1 ) {
       senderValue = message.substring(1,idx);
+      authors.add(senderValue);
       message = message.substring(idx+2);
     }
 
@@ -29,7 +31,6 @@ export function makeMessages( text ) {
     });
   }
 
-  // console.log(messagesArr);
-  return messagesArr;
+  return [Array.from(authors), messagesArr];
 
 }

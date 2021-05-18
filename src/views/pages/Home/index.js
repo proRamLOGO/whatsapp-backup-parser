@@ -1,8 +1,12 @@
 import {React, useState} from 'react' ;
 import backgroundImg from '../../../assets/background.png';
+import footerBackgroundImg from '../../../assets/bgimagedark.jpeg';
 import {makeMessages} from '../../../utils/makeMessages';
 import ChatRoom from '../../components/chatroom/' ;
 import appIcon from '../../../assets/icon.png';
+import githubIcon from '../../../assets/githubIcon.svg';
+import AuthorModal from '../../components/AuthorModal';
+import '../../../styles/App.css';
 
 const styles = {
     'header' : { 
@@ -67,24 +71,63 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+
+    'footer' : {
+        fontFamily: "'Poppins', 'sans-serif'",
+        fontSize: 27,
+        width: '100vw',
+        height: '10vh',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundImage: `url(${footerBackgroundImg})`,
+        color: '#FFF',
+        fontWeight: 'bold',
+        boxShadow: 'rgba(0, 0, 0, 0.4) 0px 1px 3px',
+    },
+    'footerDiv' : {
+        paddingLeft: '4vw',
+        width: '100vw',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    'githubIcon' : {
+        zIndex: 1,
+        height: '6vh',
+        marginTop: 'auto',
+        marginLeft: 'auto',
+        marginRight: '10px',
+        marginBottom: '-10px',
+    },
+
 };
 
 function Home() {
 
     const [messagesCollection,setMessagesCollection] = useState([]);
+    const [authorsList,setAuthorsList] = useState([]);
     const [senderName,setSenderName] = useState("");
+    const [modalState,setModalState] = useState(false);
 
     function handleFileInput(e) {
         // Reads a file and generates messages collection.
-        e.preventDefault()
+        setSenderName('');
+        e.preventDefault();
         const reader = new FileReader()
         reader.onload = async (e) => {
-            let messages = makeMessages(e.target.result)
-            setMessagesCollection(messages)};
+            const [authors, messages] = makeMessages(e.target.result);
+            setAuthorsList(authors);
+            setMessagesCollection(messages);
+            if (authors.length>1) {
+                console.log("home index");
+                setModalState(true);
+                window.scrollTo(0,document.body.scrollHeight);
+            }
+        }
         try {
             reader.readAsText(e.target.files[0]);
-            window.scrollTo(0,document.body.scrollHeight);
         } catch (err) {
             alert("No file selected!");
         }
@@ -92,6 +135,9 @@ function Home() {
 
     return (
         <>
+
+            <AuthorModal setSenderName={setSenderName} authorsList={authorsList} modalState={modalState} setModalState={setModalState} />
+
             {/* <nav>
                 NAVBAR
             </nav>         */}
@@ -113,7 +159,7 @@ function Home() {
                 
                 <p style={styles.uploadHelpText} >
                     Upload a valid Whatsapp Chat Backup txt file or try ulpoading&nbsp;
-                    <a href={'../../../utils/sampleChat.txt'} >
+                    <a href={'../../../utils/sampleChat.txt'} style={styles.sampleFileLink} >
                         this file.
                     </a>
                 </p>
@@ -122,10 +168,17 @@ function Home() {
 
             { (messagesCollection.length!==0) ?
             <section style={styles.appView} >
-                <ChatRoom content={messagesCollection} sender={senderName} />
+                <ChatRoom content={messagesCollection} sender={senderName} setModalState={setModalState} />
             </section> 
             : <></>
             }
+
+            <footer style={styles.footer} >
+                <div style={styles.footerDiv} >
+                    Made by&nbsp;<a href='http://proramlogo.github.io/' className={'footerLink'} >Shubh Bansal</a>
+                </div>
+                <a href='https://github.com/proRamLOGO/whatsapp-backup-parser'><img src={githubIcon} style={styles.githubIcon} /></a>
+            </footer>
 
         </>
     )
