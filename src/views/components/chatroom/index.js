@@ -54,7 +54,7 @@ function ChatRoom( {content, sender, setModalState} ) {
             width: (fullScreen==='enabled')?'100vw':'90vw',
             // maxWidth: '90vw',
             overflow: 'scroll',
-            fontFamily: '-apple-system, BlinkMacSystemFont',
+            fontFamily: '-apple-system, BlinkMacSystemFont, Helvetica Neue',
             paddingTop: 10,
             display: 'block',
         },
