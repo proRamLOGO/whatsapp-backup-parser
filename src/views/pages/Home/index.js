@@ -7,6 +7,7 @@ import appIcon from '../../../assets/icon.png';
 import githubIcon from '../../../assets/githubIcon.svg';
 import AuthorModal from '../../components/AuthorModal';
 import '../../../styles/App.css';
+import sampleChatFile from '../../../utils/samplechat.txt';
 
 const styles = {
     'header' : { 
@@ -29,6 +30,12 @@ const styles = {
     'headerText' : {
         fontFamily: "'Poppins', 'sans-serif'",
         fontSize: 48,
+        textAlign: 'center',
+    },
+    'p' : {
+        fontSize: 20, 
+        padding: '0px 100px 0px 100px',
+        lineHeight: '30px',
         textAlign: 'center',
     },
     'fileUploadSection' : {
@@ -65,7 +72,12 @@ const styles = {
         fontFamily: "'Roboto', 'sans-serif'",
         textAlign: 'center',
     },
-
+    'sampleFileLink' : {
+        textDecoration: 'none',
+        color: '#00565A',
+        borderBottom: '1px dotted #00565A',
+    },
+    
     'appView' : { 
         height: '100vh',
         display: 'flex',
@@ -121,9 +133,9 @@ function Home() {
             setAuthorsList(authors);
             setMessagesCollection(messages);
             if (authors.length>1) {
-                console.log("home index");
                 setModalState(true);
-                window.scrollTo(0,document.body.scrollHeight);
+                window.scrollTo(0,document.body.scrollHeight-900);
+                // document.getElementById('chatRoomSection').scrollIntoView({ behavior: 'smooth' });
             }
         }
         try {
@@ -145,6 +157,7 @@ function Home() {
                 <div style={styles.headerContent}>
                     <img id={"icon"} src={appIcon} style={styles.icon} alt={'icon'} ></img>
                     <h1 style={styles.headerText} >Whatapp Backup Parser</h1>
+                    <p style={styles.p} >Now browse through your old exported Whatsapp Chat text files conviniently as if they were right in your Whatsapp!</p>
                 </div>
             </header>    
 
@@ -159,7 +172,7 @@ function Home() {
                 
                 <p style={styles.uploadHelpText} >
                     Upload a valid Whatsapp Chat Backup txt file or try ulpoading&nbsp;
-                    <a href={'../../../utils/sampleChat.txt'} style={styles.sampleFileLink} >
+                    <a href={sampleChatFile} download={'Sample Whatsapp Exported Chat'} style={styles.sampleFileLink} >
                         this file.
                     </a>
                 </p>
@@ -167,7 +180,7 @@ function Home() {
             </section>
 
             { (messagesCollection.length!==0) ?
-            <section style={styles.appView} >
+            <section style={styles.appView} id={'chatRoomSection'} >
                 <ChatRoom content={messagesCollection} sender={senderName} setModalState={setModalState} />
             </section> 
             : <></>
