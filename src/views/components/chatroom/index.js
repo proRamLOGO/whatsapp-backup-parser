@@ -126,7 +126,7 @@ function ChatRoom( {content, sender, setModalState} ) {
                 <div style={styles.profileGroup}>
                     
                     <button style={styles.profileButton} onClick={() => setModalState(true)} >
-                        <img data-tip data-for={"profileButtonToolTip"} style={styles.chatIcon} src={unknownPersonIcon} alt={'Chat Icon'} />
+                        <img data-tip data-for={"profileButtonToolTip"} style={styles.chatIcon} src={unknownGroupIcon} alt={'Chat Icon'} />
                         <ReactTooltip id={'profileButtonToolTip'} place={'bottom'} effect={'solid'} type={(theme==='light')?'dark':'light'}>Set Sender</ReactTooltip>
                     </button>
                     

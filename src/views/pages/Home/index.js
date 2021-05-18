@@ -11,7 +11,7 @@ import sampleChatFile from '../../../utils/samplechat.txt';
 
 const styles = {
     'header' : { 
-        minHeight: '70vh', 
+        minHeight: '65vh', 
         backgroundImage: `url(${backgroundImg})`,
         color: '#fff',
         display: 'flex',
@@ -40,7 +40,7 @@ const styles = {
     },
     'fileUploadSection' : {
         top: 0, 
-        height: '30vh',
+        height: '35vh',
         backgroundColor: '#EDFFEB',
         display: 'flex',
         justifyContent: 'center',
@@ -51,7 +51,7 @@ const styles = {
     'h4' : {
         marginTop: 20,
         top: 0,
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'normal',
     }, 
     'uploadButton' : {
@@ -65,7 +65,7 @@ const styles = {
         color: '#fff',
         cursor: 'pointer',
         fontSize: 18,
-        marginTop: 20,
+        marginTop: 0,
     },
     'uploadHelpText' : {
         fontSize: 20,
@@ -77,7 +77,7 @@ const styles = {
         color: '#00565A',
         borderBottom: '1px dotted #00565A',
     },
-    
+
     'appView' : { 
         height: '100vh',
         display: 'flex',
@@ -113,6 +113,16 @@ const styles = {
         marginRight: '10px',
         marginBottom: '-10px',
     },
+    'privacyText' : {
+        color: '#0A0908',
+        backgroundColor: '#FDF4C3',
+        padding: '10px 10px 10px 10px',
+        width: '80vw',
+        textAlign: 'center',
+        paddingBottom: '-40px',
+        borderRadius: 8,
+        boxShadow: 'rgb(0 0 0 / 20%) 0px 1px 3px',
+    }
 
 };
 
@@ -164,17 +174,22 @@ function Home() {
             <section id={'fileUploadSection'} style={styles.fileUploadSection} > 
                 
                 <h4 style={styles.h4} >Try Now</h4>
-                
+
                 <label style={styles.uploadButton} >
                     Choose File
                     <input onChange={handleFileInput} type={"file"} placeholder={""} style={{visibility: 'hidden',display: 'none'}} ></input>
                 </label>
                 
                 <p style={styles.uploadHelpText} >
-                    Upload a valid Whatsapp Chat Backup txt file or try ulpoading&nbsp;
+                
+                    Upload a valid Whatsapp Chat Backup txt file or try uploading&nbsp;
                     <a href={sampleChatFile} download={'Sample Whatsapp Exported Chat'} style={styles.sampleFileLink} >
                         this file.
                     </a>
+                </p>
+                
+                <p style={styles.privacyText} >
+                    🔒 : Your Chats are absolutely safe. We do not retain your messages in the ordinary course of providing the service to you. Instead, your messages are stored on your device and not on any server.
                 </p>
 
             </section>
