@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/whatsapp-backup-parser/static/css/main.f4ac8970.chunk.css",
-    "main.js": "/whatsapp-backup-parser/static/js/main.e5033936.chunk.js",
-    "main.js.map": "/whatsapp-backup-parser/static/js/main.e5033936.chunk.js.map",
+    "main.js": "/whatsapp-backup-parser/static/js/main.9a11f1dc.chunk.js",
+    "main.js.map": "/whatsapp-backup-parser/static/js/main.9a11f1dc.chunk.js.map",
     "runtime-main.js": "/whatsapp-backup-parser/static/js/runtime-main.de5a5d17.js",
     "runtime-main.js.map": "/whatsapp-backup-parser/static/js/runtime-main.de5a5d17.js.map",
     "static/css/2.1fe20c78.chunk.css": "/whatsapp-backup-parser/static/css/2.1fe20c78.chunk.css",
@@ -38,6 +38,6 @@
     "static/css/2.1fe20c78.chunk.css",
     "static/js/2.db7c46a4.chunk.js",
     "static/css/main.f4ac8970.chunk.css",
-    "static/js/main.e5033936.chunk.js"
+    "static/js/main.9a11f1dc.chunk.js"
   ]
 }
