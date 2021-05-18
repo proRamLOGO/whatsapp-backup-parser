@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/whatsapp-backup-parser/static/css/main.f4ac8970.chunk.css",
-    "main.js": "/whatsapp-backup-parser/static/js/main.3c241cc4.chunk.js",
-    "main.js.map": "/whatsapp-backup-parser/static/js/main.3c241cc4.chunk.js.map",
+    "main.js": "/whatsapp-backup-parser/static/js/main.e5033936.chunk.js",
+    "main.js.map": "/whatsapp-backup-parser/static/js/main.e5033936.chunk.js.map",
     "runtime-main.js": "/whatsapp-backup-parser/static/js/runtime-main.de5a5d17.js",
     "runtime-main.js.map": "/whatsapp-backup-parser/static/js/runtime-main.de5a5d17.js.map",
     "static/css/2.1fe20c78.chunk.css": "/whatsapp-backup-parser/static/css/2.1fe20c78.chunk.css",
@@ -28,7 +28,7 @@
     "static/media/lightModeIcon.a406a237.svg": "/whatsapp-backup-parser/static/media/lightModeIcon.a406a237.svg",
     "static/media/lightReceivedPin.815f70a9.svg": "/whatsapp-backup-parser/static/media/lightReceivedPin.815f70a9.svg",
     "static/media/lightSentPin.2421c4b6.svg": "/whatsapp-backup-parser/static/media/lightSentPin.2421c4b6.svg",
-    "static/media/samplechat.346b81b2.txt": "/whatsapp-backup-parser/static/media/samplechat.346b81b2.txt",
+    "static/media/samplechat.c9282040.txt": "/whatsapp-backup-parser/static/media/samplechat.c9282040.txt",
     "static/media/screenShotIcon.cd294823.svg": "/whatsapp-backup-parser/static/media/screenShotIcon.cd294823.svg",
     "static/media/unknownGroup.be341f2d.svg": "/whatsapp-backup-parser/static/media/unknownGroup.be341f2d.svg",
     "static/media/unknownPerson.d3441b18.svg": "/whatsapp-backup-parser/static/media/unknownPerson.d3441b18.svg"
@@ -38,6 +38,6 @@
     "static/css/2.1fe20c78.chunk.css",
     "static/js/2.db7c46a4.chunk.js",
     "static/css/main.f4ac8970.chunk.css",
-    "static/js/main.3c241cc4.chunk.js"
+    "static/js/main.e5033936.chunk.js"
   ]
 }
