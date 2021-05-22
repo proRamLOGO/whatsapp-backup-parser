@@ -18,6 +18,22 @@ The solution is to take such a text file and present it in an interface similar 
 
 ## Try it out [here](https://proramlogo.github.io/whatsapp-backup-parser/).
 
+## Screenshots
+<table>
+  <tr>
+    <td colspan=2><img src='https://user-images.githubusercontent.com/22429835/119224523-68ffb900-bb1c-11eb-9b25-d019d5edb859.png' /></td>
+  </tr>
+  <tr>
+    <td>Custom sender select<img src='https://user-images.githubusercontent.com/22429835/119224530-72892100-bb1c-11eb-9c2a-97f63a3386a5.png' /></td>
+    <td>Chat Room Standard View<img src='https://user-images.githubusercontent.com/22429835/119224541-7ddc4c80-bb1c-11eb-9ed0-ad0ab393e3f6.png' /></td>
+  </tr>
+  <tr>
+    <td>Dark Mode and Fullscreen<img src='https://user-images.githubusercontent.com/22429835/119224548-82086a00-bb1c-11eb-911b-f85fe0798cae.png' /></td>
+    <td>Screenshot<img src='https://user-images.githubusercontent.com/22429835/119224554-85035a80-bb1c-11eb-933d-17ac97ad7786.png' /></td>
+  </tr>
+</table>
+
+
 <hr/>
 
 # For Development Purposes
