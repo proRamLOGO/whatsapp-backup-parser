@@ -12,8 +12,8 @@ The solution is to take such a text file and present it in an interface similar 
 - [x] Classifies message as sent, recieved or group vital.
 - [x] Text formatting support (Bold, Italic and Strikethrough).
 - [x] Clickable hyperlinks.
+- [x] Date banners.
 - [ ] Support for attached media / Detection of omitted media.
-- [ ] Date banners.
 - [ ] Chat info.
 
 ## Try it out [here](https://proramlogo.github.io/whatsapp-backup-parser/).
