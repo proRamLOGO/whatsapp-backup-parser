@@ -7,7 +7,7 @@ import appIcon from '../../../assets/icon.png';
 import githubIcon from '../../../assets/githubIcon.svg';
 import AuthorModal from '../../components/AuthorModal';
 import '../../../styles/App.css';
-import sampleChatFile from '../../../utils/samplechat.txt';
+import sampleChatFile from '../../../utils/sampleChat.txt';
 
 const styles = {
     'header' : { 

@@ -185,7 +185,7 @@ function Message( {content, sender, theme} ) {
                     
                     {  
                     (classOfMsg!=="banner")?
-                    <p style={styles.time} >{content.timestamp.substring(11,15 + (content.timestamp[12]!==':') ) + ' ' + content.timestamp.substring(content.timestamp.length-3,content.timestamp.length-1)} </p>
+                    <p style={styles.time} >{content.timestamp.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
                     :<></>
                     }
 
