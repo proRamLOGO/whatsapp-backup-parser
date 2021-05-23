@@ -59,6 +59,7 @@ function ChatRoom( {content, sender, setModalState} ) {
             display: 'block',
         },
         'chatBar' : {
+            width: (fullScreen==='enabled')?'100vw':'90vw',
             height: '7vh',
             display: 'flex',
             flexDirection: 'row',
